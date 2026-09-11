@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* Tailwind v4 doesn't wire up `dark:` to a `.dark` class by default —
+   it needs to be told explicitly. This is why the toggle button changed
+   the class on <html> but nothing visually updated. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8C97A;
+  --gold-dark: #A07830;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+.font-display {
+  font-family: 'Playfair Display', serif;
+}
+
+.gold-text {
+  background: linear-gradient(135deg, #C9A84C, #E8C97A, #C9A84C);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* lucide-react icon fix */
+svg { display: inline; }
