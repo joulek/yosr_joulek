@@ -12,7 +12,6 @@ export const translations = {
       title: "Développeuse Full-Stack",
       subtitle: "Je conçois et développe des expériences web modernes — du concept au déploiement.",
       cta: "Voir mes projets",
-      ctaContact: "Me contacter",
       available: "Disponible pour de nouvelles opportunités",
     },
     about: {
@@ -31,9 +30,18 @@ export const translations = {
       title: "Projets récents",
       items: [
         {
+          title: "Site Web du Challenge IA & Génie Civil",
+          desc: "Conception, développement et déploiement du site officiel de la compétition, avec gestion des rôles, soumission des projets et suivi des évaluations.",
+          tags: ["Next.js", "Express.js", "Node.js", "MongoDB"],
+          type: "Projet Freelance",
+          image: "/ia-gc-challenge.png",
+          demoUrl: "https://ia-gc-challenge.tn/",
+          codeUrl: "",
+        },
+        {
           title: "Optylab — Recrutement propulsé par l'IA",
           desc: "Application web de recrutement avec analyse de CV et matching de candidats par IA, du développement au déploiement.",
-          tags: ["Next.js", "Node.js", "FastAPI", "MongoDB", "Docker", "Groq API"],
+          tags: ["Next.js", "Node.js", "FastAPI", "MongoDB", "Docker", "Groq API", "LLMs"],
           type: "Stage PFE",
           image: "/optylab.png",
           demoUrl: "https://recrutement.optylab.com/",
@@ -42,7 +50,7 @@ export const translations = {
         {
           title: "MTR — Portail client multilingue",
           desc: "Application web multilingue avec portail client sécurisé, gestion de devis, axée performance et SEO.",
-          tags: ["Next.js 15", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
+          tags: ["Next.js 15", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "SEO"],
           type: "Freelance",
           image: "/mtr.png",
           demoUrl: "https://mtr-ressorts.tn/",
@@ -56,16 +64,8 @@ export const translations = {
           image: "/sbtf.png",
           demoUrl: "",
           codeUrl: "",
-        },
-        {
-          title: "AutoElite — Site web d’agence automobile",
-          desc: "Conception et développement d’un site web moderne et responsive pour une agence automobile, présentant les véhicules et offrant une expérience utilisateur fluide sur tous les appareils.",
-          tags: ["Next.js", "Tailwind CSS", "Render.com"],
-          type: "Projet personnel",
-          image: "/autoelite.png",
-          demoUrl: "https://autoelite-rx99.onrender.com",
-          codeUrl: "",
-        },
+        }
+
 
 
       ],
@@ -77,10 +77,26 @@ export const translations = {
       label: "Technologies",
       title: "Mon stack technique",
       categories: [
-        { name: "Frontend", items: ["React.js", "Next.js", "TypeScript", "Tailwind CSS", "HTML5 / CSS3"] },
-        { name: "Backend", items: ["Node.js", "Express.js", "FastAPI", "Flask", "Spring Boot"] },
-        { name: "Base de données", items: ["MongoDB", "PostgreSQL", "MySQL"] },
-        { name: "IA & Outils", items: ["LLMs", "Prompt Engineering", "AI Agents", "Docker", "Git"] },
+        {
+          name: "Frontend",
+          items: ["React.js", "Next.js", "Tailwind CSS", "HTML5 / CSS3"]
+        },
+        {
+          name: "Backend",
+          items: ["Node.js", "Express.js", "Hono.js", "FastAPI", "Flask", "Spring Boot", "Symfony", ".NET"]
+        },
+        {
+          name: "Databases",
+          items: ["MongoDB", "PostgreSQL", "MySQL"]
+        },
+        {
+          name: "AI & DevOps",
+          items: ["LLM APIs", "AI Agents", "Prompt Engineering", "Docker", "Docker Compose", "Git"]
+        },
+        {
+          name: "Testing",
+          items: ["Jest", "Cypress", "Vitest", "Pytest"]
+        },
       ],
     },
     contact: {
@@ -136,22 +152,32 @@ export const translations = {
       title: "Recent projects",
       items: [
         {
+          title: "IA & Civil Engineering Challenge Website",
+          desc: "Developed and deployed the official competition website, featuring role-based access, team submissions, and project evaluation workflows.",
+          tags: ["Next.js", "Express.js", "Node.js", "MongoDB"],
+          type: "Freelance Project",
+          image: "/ia-gc-challenge.png",
+          demoUrl: "https://ia-gc-challenge.tn/",
+          codeUrl: "",
+        },
+
+        {
           title: "Optylab — AI-Powered Recruitment",
           desc: "Web application for AI-powered recruitment with CV analysis and candidate matching, built end-to-end from development to deployment.",
-          tags: ["Next.js", "Node.js", "FastAPI", "MongoDB", "Docker", "Groq API"],
+          tags: ["Next.js", "Node.js", "FastAPI", "MongoDB", "Docker", "Groq API", "LLMs", "Vitest", "Pytest", "Cypress"],
           type: "Final-year internship",
           image: "/optylab.png",
-          demoUrl: "",
+          demoUrl: "https://recrutement.optylab.com/",
           codeUrl: "",
         },
 
         {
           title: "MTR — Multilingual Client Portal",
           desc: "Multilingual web app with a secure client portal and quote management, built with a focus on performance and SEO.",
-          tags: ["Next.js 15", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
+          tags: ["Next.js", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "SEO"],
           type: "Freelance",
           image: "/mtr.png",
-          demoUrl: "",
+          demoUrl: "https://mtr-ressorts.tn/",
           codeUrl: "",
         },
         {
@@ -161,15 +187,6 @@ export const translations = {
           type: "Freelance",
           image: "/sbtf.png",
           demoUrl: "",
-          codeUrl: "",
-        },
-        {
-          title: "AutoElite — Car Agency Website",
-          desc: "Designed and developed a modern responsive website for a car agency, showcasing vehicles and providing a smooth user experience across devices.",
-          tags: ["Next.js", "Tailwind CSS", "Render.com"],
-          type: "Personal Project",
-          image: "/autoelite.png",
-          demoUrl: "https://autoelite-rx99.onrender.com",
           codeUrl: "",
         },
 
@@ -183,10 +200,26 @@ export const translations = {
       label: "Skills",
       title: "My tech stack",
       categories: [
-        { name: "Frontend", items: ["React.js", "Next.js", "TypeScript", "Tailwind CSS", "HTML5 / CSS3"] },
-        { name: "Backend", items: ["Node.js", "Express.js", "FastAPI", "Flask", "Spring Boot"] },
-        { name: "Database", items: ["MongoDB", "PostgreSQL", "MySQL"] },
-        { name: "AI & Tools", items: ["LLMs", "Prompt Engineering", "AI Agents", "Docker", "Git"] },
+        {
+          name: "Frontend",
+          items: ["React.js", "Next.js", "Tailwind CSS", "HTML5 / CSS3"]
+        },
+        {
+          name: "Backend",
+          items: ["Node.js", "Express.js", "Hono.js", "FastAPI", "Flask", "Spring Boot", "Symfony", ".NET"]
+        },
+        {
+          name: "Databases",
+          items: ["MongoDB", "PostgreSQL", "MySQL"]
+        },
+        {
+          name: "AI & DevOps",
+          items: ["LLM APIs", "AI Agents", "Prompt Engineering", "Docker", "Docker Compose", "Git"]
+        },
+        {
+          name: "Testing",
+          items: ["Jest", "Cypress", "Vitest", "Pytest"]
+        },
       ],
     },
     contact: {

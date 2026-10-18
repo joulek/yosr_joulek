@@ -1,71 +1,63 @@
 "use client";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
+import { Award } from "lucide-react";
 import { Translations } from "@/lib/translations";
+import { Slide, Eyebrow, Reveal, ease } from "./Slide";
 
 export function About({ t }: { t: Translations }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section id="about" className="py-28 bg-zinc-50 dark:bg-zinc-900">
-      <div className="max-w-6xl mx-auto px-6" ref={ref}>
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
-          <div>
-            <motion.span
-              initial={{ opacity: 0, x: -20 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.5 }}
-              className="inline-block text-sm font-bold uppercase tracking-widest mb-4"
-              style={{ color: "#C9A84C" }}
-            >
-              {t.about.label}
-            </motion.span>
+    <Slide n="02" id="about">
+      <div className="grid lg:grid-cols-12 gap-14 lg:gap-20 items-center">
+        {/* ── Récit ── */}
+        <div className="lg:col-span-7">
+          <Eyebrow n="02" label={t.about.label} />
 
-            <motion.h2
-              initial={{ opacity: 0, x: -20 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-4xl md:text-5xl font-display font-black text-zinc-900 dark:text-white mb-6 leading-tight"
-            >
+          <Reveal delay={0.1}>
+            <h2 className="font-display font-black text-4xl md:text-6xl leading-[1.05] tracking-tight text-ink mb-8">
               {t.about.title}
-            </motion.h2>
+            </h2>
+          </Reveal>
 
-            <motion.p
-              initial={{ opacity: 0, x: -20 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-zinc-600 dark:text-zinc-400 text-lg leading-relaxed mb-5"
+          <Reveal delay={0.25}>
+            <p className="text-muted text-base md:text-lg leading-[1.85] mb-8 max-w-xl">{t.about.p1}</p>
+          </Reveal>
+
+          {/* Citation / distinction mise en avant */}
+          <Reveal delay={0.4}>
+            <div className="relative max-w-xl pl-7">
+              <motion.span
+                initial={{ scaleY: 0 }}
+                animate={{ scaleY: 1 }}
+                transition={{ duration: 1, delay: 0.9, ease }}
+                style={{ transformOrigin: "top" }}
+                className="absolute left-0 top-0 bottom-0 w-[2px] bg-gold"
+              />
+              <Award size={20} className="text-gold mb-3" />
+              <p className="font-display italic text-lg md:text-xl leading-relaxed text-ink">{t.about.p2}</p>
+            </div>
+          </Reveal>
+        </div>
+
+        {/* ── Chiffres clés ── */}
+        <div className="lg:col-span-5">
+          {t.about.stats.map((stat, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 + i * 0.15, ease }}
+              className="group flex items-end justify-between gap-6 border-t border-line py-7 last:border-b transition-colors hover:border-gold"
             >
-              {t.about.p1}
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0, x: -20 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="text-zinc-600 dark:text-zinc-400 text-lg leading-relaxed"
-            >
-              {t.about.p2}
-            </motion.p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-5">
-            {t.about.stats.map((stat, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
-                className="flex items-center gap-6 p-6 rounded-2xl bg-white dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700/50 hover:border-gold transition-colors"
-              >
-                <div className="text-5xl font-display font-black gold-text leading-none">{stat.value}</div>
-                <div className="text-zinc-600 dark:text-zinc-400 font-medium text-lg">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
+              <div className="font-display font-black text-6xl md:text-7xl leading-none text-gold transition-transform duration-500 group-hover:translate-x-1">
+                {stat.value}
+              </div>
+              <div className="text-right text-[11px] md:text-xs font-semibold uppercase tracking-[0.22em] text-muted max-w-[11rem] leading-relaxed">
+                {stat.label}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
-    </section>
+    </Slide>
   );
 }

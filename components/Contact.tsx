@@ -1,9 +1,10 @@
 "use client";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { Mail } from "lucide-react";
+import { motion } from "framer-motion";
+import { Mail, ArrowUpRight } from "lucide-react";
 import { Translations } from "@/lib/translations";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { Slide, Eyebrow, Reveal, ease } from "./Slide";
+import { Footer } from "./Footer";
 
 const contacts = [
   {
@@ -30,105 +31,61 @@ const contacts = [
 ];
 
 export function Contact({ t }: { t: Translations }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
   return (
-    <section id="contact" className="py-28 bg-white dark:bg-zinc-950">
-      <div className="max-w-4xl mx-auto px-6" ref={ref}>
+    <Slide n="05" id="contact">
+      <Eyebrow n="05" label={t.contact.label} />
 
-        {/* Header */}
-        <div className="text-center mb-16">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            className="inline-block text-sm font-bold uppercase tracking-widest mb-4"
-            style={{ color: "#C9A84C" }}
-          >
-            {t.contact.label}
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 10 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-display font-black text-zinc-900 dark:text-white mb-4"
-          >
-            {t.contact.title}
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.2 }}
-            className="text-zinc-500 dark:text-zinc-400 text-lg max-w-lg mx-auto"
-          >
-            {t.contact.subtitle}
-          </motion.p>
+      <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        {/* ── Message ── */}
+        <div className="lg:col-span-5">
+          <Reveal delay={0.1}>
+            <h2 className="font-display font-black text-4xl md:text-6xl leading-[1.05] tracking-tight text-ink mb-6">
+              {t.contact.title}
+            </h2>
+          </Reveal>
+          <Reveal delay={0.25}>
+            <p className="text-muted text-base md:text-lg leading-relaxed max-w-md mb-8">{t.contact.subtitle}</p>
+          </Reveal>
+          <Reveal delay={0.4}>
+            <p className="font-display italic text-lg text-gold max-w-sm">{t.contact.subtitle2}</p>
+          </Reveal>
         </div>
 
-        {/* Contact cards */}
-        <div className="grid sm:grid-cols-3 gap-5">
+        {/* ── Coordonnées ── */}
+        <div className="lg:col-span-7">
           {contacts.map(({ Icon, label, value, href, description }, i) => (
             <motion.a
-              key={i}
+              key={label}
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 24 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.45, delay: 0.15 + i * 0.1 }}
-              className="group relative flex flex-col items-center text-center gap-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 px-6 py-8 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
-              onMouseEnter={e => (e.currentTarget.style.borderColor = "#C9A84C66")}
-              onMouseLeave={e => (e.currentTarget.style.borderColor = "")}
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.45 + i * 0.12, ease }}
+              className="group flex items-center gap-5 md:gap-7 border-t border-line py-6 last:border-b transition-colors hover:border-gold"
             >
-              {/* Glow on hover */}
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"
-                style={{ background: "radial-gradient(ellipse at 50% 0%, #C9A84C0D 0%, transparent 70%)" }}
-              />
-
-              {/* Icon */}
-              <div
-                className="w-14 h-14 rounded-2xl flex items-center justify-center text-zinc-950 flex-shrink-0"
-                style={{ background: "linear-gradient(135deg, #C9A84C, #E8C97A, #A07830)" }}
-              >
-                <Icon size={22} />
-              </div>
-
-              {/* Text */}
-              <div>
-                <p className="text-xs font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-1">
-                  {label}
-                </p>
-                <p className="font-semibold text-zinc-900 dark:text-zinc-100 text-sm break-all mb-1">
-                  {value}
-                </p>
-                <p className="text-xs text-zinc-400 dark:text-zinc-500">
-                  {description}
-                </p>
-              </div>
-
-              {/* Arrow hint */}
-              <span
-                className="text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-200 mt-1"
-                style={{ color: "#C9A84C" }}
-              >
-                Ouvrir →
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-gold text-gold transition-colors duration-300 group-hover:bg-gold group-hover:text-[var(--bg)]">
+                <Icon size={18} />
               </span>
+              <span className="min-w-0 flex-1">
+                <span className="block text-[10px] font-semibold uppercase tracking-[0.25em] text-muted mb-1">
+                  {label}
+                </span>
+                <span className="block break-all font-display text-lg md:text-2xl font-bold text-ink transition-transform duration-300 group-hover:translate-x-1">
+                  {value}
+                </span>
+                <span className="block text-xs text-muted mt-1">{description}</span>
+              </span>
+              <ArrowUpRight
+                size={20}
+                className="shrink-0 text-muted transition-all duration-300 group-hover:text-gold group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              />
             </motion.a>
           ))}
         </div>
-
-        {/* Divider quote */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.6 }}
-          className="text-center text-zinc-400 dark:text-zinc-600 text-sm mt-14 italic"
-        >
-          {t.contact.subtitle2}
-         
-        </motion.p>
       </div>
-    </section>
+
+      <Footer t={t} />
+    </Slide>
   );
 }

@@ -4,21 +4,17 @@ import { motion } from "framer-motion";
 export function Avatar() {
   return (
     <div className="relative w-72 h-72 md:w-80 md:h-80">
-      {/* Spinning gold ring */}
+      {/* Anneaux fins : un doré qui tourne lentement, un statique */}
       <motion.div
-        className="absolute inset-0 rounded-full"
-        style={{
-          background: "conic-gradient(from 0deg, #C9A84C, #E8C97A, #A07830, #E8C97A, #C9A84C)",
-          padding: "3px",
-        }}
+        className="absolute -inset-5 rounded-full border border-dashed border-gold opacity-50"
         animate={{ rotate: 360 }}
-        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-      >
-        <div className="w-full h-full rounded-full bg-white dark:bg-zinc-950" />
-      </motion.div>
+        transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
+      />
+      <div className="absolute -inset-2 rounded-full border border-line" />
+      <div className="absolute inset-0 rounded-full border border-gold" />
 
       {/* Avatar SVG */}
-      <div className="absolute inset-[4px] rounded-full overflow-hidden bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900">
+      <div className="absolute inset-[6px] rounded-full overflow-hidden bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900">
         <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
           <defs>
             <radialGradient id="bgGrad" cx="50%" cy="50%" r="60%">
@@ -158,13 +154,12 @@ export function Avatar() {
 
       {/* Gold badge */}
       <motion.div
-        className="absolute -bottom-2 -right-2 text-zinc-900 text-xs font-bold px-3 py-1.5 rounded-full shadow-lg border-2 border-zinc-900 dark:border-zinc-950"
-        style={{ background: "linear-gradient(135deg, #C9A84C, #E8C97A)" }}
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 0.8, type: "spring" }}
+        className="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-paper border border-gold px-5 py-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-gold"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.2, duration: 0.6 }}
       >
-        👩‍💻 Full-Stack Dev
+        Full-Stack Dev
       </motion.div>
     </div>
   );

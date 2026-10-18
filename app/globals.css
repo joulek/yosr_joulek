@@ -1,33 +1,79 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
-/* Tailwind v4 doesn't wire up `dark:` to a `.dark` class by default —
-   it needs to be told explicitly. This is why the toggle button changed
-   the class on <html> but nothing visually updated. */
+/* Tailwind v4: le variant `dark:` doit être relié explicitement à la classe `.dark`. */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ───────────── Palette : papier ivoire / encre / or ───────────── */
 :root {
-  --gold: #C9A84C;
-  --gold-light: #E8C97A;
-  --gold-dark: #A07830;
+  --bg: #F5F1E8;
+  --bg2: #ECE6D8;
+  --ink: #1B1915;
+  --muted: #6B655A;
+  --line: #D9D1BF;
+  --gold: #A87F2A;
+  --gold-soft: rgba(168, 127, 42, 0.12);
+}
+
+.dark {
+  --bg: #0D0C0A;
+  --bg2: #15130F;
+  --ink: #F1ECE0;
+  --muted: #9A9384;
+  --line: #2A2620;
+  --gold: #D4AF63;
+  --gold-soft: rgba(212, 175, 99, 0.1);
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden; /* le diaporama gère lui-même la navigation */
 }
 
 html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  transition: background 0.4s ease, color 0.4s ease;
+  -webkit-font-smoothing: antialiased;
 }
 
-.font-display {
-  font-family: 'Playfair Display', serif;
+/* Utilitaires de palette */
+.bg-paper   { background: var(--bg); }
+.bg-paper-2 { background: var(--bg2); }
+.text-ink   { color: var(--ink); }
+.text-muted { color: var(--muted); }
+.text-gold  { color: var(--gold); }
+.bg-gold    { background: var(--gold); }
+.border-line { border-color: var(--line); }
+.border-gold { border-color: var(--gold); }
+.bg-line    { background: var(--line); }
+.hover\:text-gold:hover { color: var(--gold); }
+.hover\:border-gold:hover { border-color: var(--gold); }
+
+.font-display { font-family: 'Playfair Display', serif; }
+
+/* Grand chiffre contouré en arrière-plan de chaque slide */
+.num-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--line);
+  letter-spacing: -0.04em;
 }
 
-.gold-text {
-  background: linear-gradient(135deg, #C9A84C, #E8C97A, #C9A84C);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Léger grain de papier */
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
+
+::selection { background: var(--gold); color: var(--bg); }
 
 /* lucide-react icon fix */
 svg { display: inline; }

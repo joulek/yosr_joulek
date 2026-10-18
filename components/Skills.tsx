@@ -1,62 +1,58 @@
 "use client";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import { Translations } from "@/lib/translations";
+import { Slide, Eyebrow, Reveal, ease } from "./Slide";
 
 export function Skills({ t }: { t: Translations }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
   return (
-    <section id="skills" className="py-28 bg-zinc-50 dark:bg-zinc-900">
-      <div className="max-w-6xl mx-auto px-6" ref={ref}>
-        <div className="text-center mb-16">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            className="inline-block text-sm font-bold uppercase tracking-widest mb-4"
-            style={{ color: "#C9A84C" }}
-          >
-            {t.skills.label}
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 10 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-display font-black text-zinc-900 dark:text-white"
-          >
-            {t.skills.title}
-          </motion.h2>
-        </div>
+    <Slide n="04" id="skills">
+      <Eyebrow n="04" label={t.skills.label} />
+      <Reveal delay={0.1}>
+        <h2 className="font-display font-black text-4xl md:text-6xl leading-[1.05] tracking-tight text-ink mb-14">
+          {t.skills.title}
+        </h2>
+      </Reveal>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {t.skills.categories.map((cat, i) => (
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-12">
+        {t.skills.categories.map((cat, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 36 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 + i * 0.12, ease }}
+            className="group"
+          >
+            <div className="flex items-baseline justify-between mb-4">
+              <h3 className="font-display text-xl font-bold text-ink">{cat.name}</h3>
+              <span className="font-display text-sm font-bold text-gold">0{i + 1}</span>
+            </div>
+
+            {/* filet qui se dessine */}
             <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 + i * 0.1 }}
-              className="p-6 rounded-2xl bg-white dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700/50 hover:border-gold transition-colors group"
-            >
-              {/* Category header with gold underline */}
-              <div className="mb-5">
-                <h3 className="font-display font-bold text-lg text-zinc-900 dark:text-white mb-1">{cat.name}</h3>
-                <div className="h-0.5 w-10 group-hover:w-full transition-all duration-500 rounded-full"
-                  style={{ background: "linear-gradient(90deg, #C9A84C, #E8C97A)" }} />
-              </div>
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.9, delay: 0.7 + i * 0.12, ease }}
+              style={{ transformOrigin: "left" }}
+              className="h-px w-full bg-gold mb-2"
+            />
 
-              <ul className="space-y-3">
-                {cat.items.map((item) => (
-                  <li key={item} className="flex items-center gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "#C9A84C" }} />
-                    <span className="text-zinc-600 dark:text-zinc-400 text-sm font-medium">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
-        </div>
+            <ul>
+              {cat.items.map((item, j) => (
+                <motion.li
+                  key={item}
+                  initial={{ opacity: 0, x: -12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.85 + i * 0.12 + j * 0.06, ease }}
+                  className="flex items-center justify-between border-b border-line py-3 text-sm font-medium text-muted transition-all duration-300 hover:pl-2 hover:text-ink hover:border-gold"
+                >
+                  {item}
+                  <span className="h-1 w-1 rounded-full bg-gold opacity-60" />
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
+        ))}
       </div>
-    </section>
+    </Slide>
   );
 }

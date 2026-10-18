@@ -1,124 +1,151 @@
 "use client";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { ExternalLink, GitFork, Code2 } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ExternalLink, Code2, ArrowUpRight } from "lucide-react";
 import { Translations } from "@/lib/translations";
+import { Slide, Eyebrow, Reveal, ease } from "./Slide";
+
+const pad = (n: number) => String(n + 1).padStart(2, "0");
 
 export function Projects({ t }: { t: Translations }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const [active, setActive] = useState(0);
+  const items = t.projects.items;
+  const proj = items[active];
+  const hasDemo = Boolean(proj.demoUrl);
 
   return (
-    <section id="projects" className="py-28 bg-white dark:bg-zinc-950">
-      <div className="max-w-6xl mx-auto px-6" ref={ref}>
-        <div className="text-center mb-16">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4 }}
-            className="inline-block text-sm font-bold uppercase tracking-widest mb-4"
-            style={{ color: "#C9A84C" }}
-          >
-            {t.projects.label}
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 10 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-display font-black text-zinc-900 dark:text-white"
-          >
-            {t.projects.title}
-          </motion.h2>
-        </div>
+    <Slide n="03" id="projects">
+      <Eyebrow n="03" label={t.projects.label} />
+      <Reveal delay={0.1}>
+        <h2 className="font-display font-black text-4xl md:text-6xl leading-[1.05] tracking-tight text-ink mb-12">
+          {t.projects.title}
+        </h2>
+      </Reveal>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {t.projects.items.map((proj, i) => {
-            const hasDemo = Boolean(proj.demoUrl);
-            const hasCode = Boolean(proj.codeUrl);
-            return (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.1 + i * 0.1 }}
-                className="group relative rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-gold transition-all duration-300 overflow-hidden"
-              >
-                {/* Project image / fallback preview */}
-                <div className="relative h-44 w-full overflow-hidden">
+      <div className="grid lg:grid-cols-12 gap-10 lg:gap-14">
+        {/* ── Sommaire ── */}
+        <Reveal delay={0.25} className="lg:col-span-4">
+          <ul className="flex lg:flex-col gap-2 lg:gap-0 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 -mx-1 px-1">
+            {items.map((p, i) => {
+              const isActive = i === active;
+              return (
+                <li key={i} className="shrink-0 lg:shrink">
+                  <button
+                    onClick={() => setActive(i)}
+                    onMouseEnter={() => setActive(i)}
+                    className={`group relative flex w-full items-center gap-4 border lg:border-0 lg:border-t lg:last:border-b rounded-full lg:rounded-none px-5 lg:px-0 py-3 lg:py-5 text-left transition-colors ${
+                      isActive ? "border-gold" : "border-line"
+                    }`}
+                  >
+                    <span
+                      className={`font-display text-sm font-bold transition-colors ${
+                        isActive ? "text-gold" : "text-muted"
+                      }`}
+                    >
+                      {pad(i)}
+                    </span>
+                    <span className="flex-1 min-w-0">
+                      <span
+                        className={`block font-display text-base lg:text-lg font-bold leading-tight transition-colors whitespace-nowrap lg:whitespace-normal ${
+                          isActive ? "text-ink" : "text-muted group-hover:text-ink"
+                        }`}
+                      >
+                        {p.title.split(" — ")[0]}
+                      </span>
+                      <span className="hidden lg:block mt-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted">
+                        {p.type}
+                      </span>
+                    </span>
+                    {isActive && (
+                      <motion.span
+                        layoutId="proj-marker"
+                        className="hidden lg:block absolute left-0 right-0 top-0 h-px bg-gold"
+                      />
+                    )}
+                    <ArrowUpRight
+                      size={16}
+                      className={`hidden lg:block transition-all duration-300 ${
+                        isActive ? "text-gold translate-x-0 opacity-100" : "opacity-0 -translate-x-2"
+                      }`}
+                    />
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </Reveal>
+
+        {/* ── Aperçu du projet sélectionné ── */}
+        <div className="lg:col-span-8">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.45, ease }}
+              className="grid md:grid-cols-5 gap-8 items-start"
+            >
+              {/* Fenêtre « navigateur » */}
+              <div className="md:col-span-3 overflow-hidden rounded-xl border border-line bg-paper-2 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.45)]">
+                <div className="flex items-center gap-1.5 border-b border-line px-4 py-2.5">
+                  <span className="h-2 w-2 rounded-full bg-line" />
+                  <span className="h-2 w-2 rounded-full bg-line" />
+                  <span className="h-2 w-2 rounded-full bg-line" />
+                </div>
+                <div className="relative aspect-[16/10] w-full overflow-hidden">
                   {proj.image ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={proj.image}
-                      alt={proj.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
+                    <img src={proj.image} alt={proj.title} className="h-full w-full object-cover object-top" />
                   ) : (
-                    <div
-                      className="w-full h-full flex items-center justify-center"
-                      style={{ background: "linear-gradient(135deg, #C9A84C22, #A0783011)" }}
-                    >
-                      <Code2 size={36} style={{ color: "#C9A84C88" }} />
+                    <div className="flex h-full w-full items-center justify-center">
+                      <Code2 size={36} className="text-gold opacity-60" />
                     </div>
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                 </div>
+              </div>
 
-                <div className="p-7">
-                  {/* Gold corner accent */}
-                  <div className="absolute top-44 right-0 w-24 h-24 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                    style={{ background: "radial-gradient(circle at top right, #C9A84C22, transparent)" }} />
+              {/* Détails */}
+              <div className="md:col-span-2">
+                <span className="inline-block rounded-full border border-gold px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-gold mb-4">
+                  {proj.type}
+                </span>
+                <h3 className="font-display text-xl md:text-2xl font-bold leading-snug text-ink mb-3">
+                  {proj.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-muted mb-5">{proj.desc}</p>
 
-                  <div className="flex items-start justify-between mb-4">
-                    <span className="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full border"
-                      style={{ color: "#C9A84C", borderColor: "#C9A84C44", background: "#C9A84C0A" }}>
-                      {proj.type}
+                <div className="flex flex-wrap gap-1.5 mb-6">
+                  {proj.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full border border-line px-2.5 py-1 text-[11px] font-medium text-muted"
+                    >
+                      {tag}
                     </span>
-                    <div className="flex gap-2">
-                    
-                      {hasDemo ? (
-                        <a
-                          href={proj.demoUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          title={t.projects.viewDemo}
-                          className="w-8 h-8 rounded-full border border-zinc-300 dark:border-zinc-700 flex items-center justify-center text-zinc-500 dark:text-zinc-400 hover:text-gold hover:border-gold transition-colors"
-                        >
-                          <ExternalLink size={14} />
-                        </a>
-                      ) : (
-                        <span
-                          title={t.projects.noLink}
-                          className="w-8 h-8 rounded-full border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-300 dark:text-zinc-700 cursor-not-allowed"
-                        >
-                          <ExternalLink size={14} />
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  <h3 className="text-xl font-display font-bold text-zinc-900 dark:text-white mb-3 group-hover:gold-text transition-all">
-                    {proj.title}
-                  </h3>
-                  <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-5">
-                    {proj.desc}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2">
-                    {proj.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-xs font-medium px-2.5 py-1 rounded-full bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                  ))}
                 </div>
-              </motion.div>
-            );
-          })}
+
+                {hasDemo ? (
+                  <a
+                    href={proj.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-gold"
+                  >
+                    <span className="border-b border-gold pb-0.5">{t.projects.viewDemo}</span>
+                    <ExternalLink size={13} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </a>
+                ) : (
+                  <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-muted opacity-60">
+                    {t.projects.noLink}
+                  </span>
+                )}
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
-    </section>
+    </Slide>
   );
 }
