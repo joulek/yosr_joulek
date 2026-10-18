@@ -31,7 +31,7 @@ export function Navbar({ t, lang, setLang, index, go }: NavbarProps) {
       initial={{ y: -30, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed top-0 inset-x-0 z-50"
+      className="fixed top-0 inset-x-0 z-50 border-b border-line/60 bg-paper/80 backdrop-blur-md"
     >
       <div className="max-w-6xl mx-auto px-6 md:px-10 h-20 flex items-center justify-between">
         {/* Monogramme */}

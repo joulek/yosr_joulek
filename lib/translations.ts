@@ -79,7 +79,7 @@ export const translations = {
       categories: [
         {
           name: "Frontend",
-          items: ["React.js", "Next.js", "Tailwind CSS", "HTML5 / CSS3"]
+          items: ["React.js", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "HTML5 / CSS3"]
         },
         {
           name: "Backend",
@@ -91,12 +91,16 @@ export const translations = {
         },
         {
           name: "AI & DevOps",
-          items: ["LLM APIs", "AI Agents", "Prompt Engineering", "Docker", "Docker Compose", "Git"]
+          items: ["LLM APIs", "AI Agents", "Prompt Engineering", "Docker", "Docker Compose", "Git", "GitHub", "GitLab"]
         },
         {
           name: "Testing",
           items: ["Jest", "Cypress", "Vitest", "Pytest"]
         },
+        {
+          name: "Programming Languages",
+          items: ["JavaScript", "TypeScript", "Python", "PHP", "Java", "C#"]
+        }
       ],
     },
     contact: {
@@ -202,7 +206,7 @@ export const translations = {
       categories: [
         {
           name: "Frontend",
-          items: ["React.js", "Next.js", "Tailwind CSS", "HTML5 / CSS3"]
+          items: ["React.js", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "HTML5 / CSS3"]
         },
         {
           name: "Backend",
@@ -214,12 +218,16 @@ export const translations = {
         },
         {
           name: "AI & DevOps",
-          items: ["LLM APIs", "AI Agents", "Prompt Engineering", "Docker", "Docker Compose", "Git"]
+          items: ["LLM APIs", "AI Agents", "Prompt Engineering", "Docker", "Docker Compose", "Git", "GitHub", "GitLab"]
         },
         {
           name: "Testing",
           items: ["Jest", "Cypress", "Vitest", "Pytest"]
         },
+        {
+          name: "Programming Languages",
+          items: ["JavaScript", "TypeScript", "Python", "PHP", "Java", "C#"]
+        }
       ],
     },
     contact: {
