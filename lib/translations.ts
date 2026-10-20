@@ -30,12 +30,12 @@ export const translations = {
       title: "Projets récents",
       items: [
         {
-          title: "Site Web du Challenge IA & Génie Civil",
-          desc: "Conception, développement et déploiement du site officiel de la compétition, avec gestion des rôles, soumission des projets et suivi des évaluations.",
+          title: "RPM Conception",
+          desc: "Développement et déploiement du site officiel de RPM Conception, avec gestion des produits et des catégories, présentation des réalisations en métallerie et interface responsive pour valoriser les services de fabrication métallique sur mesure.",
           tags: ["Next.js", "Express.js", "Node.js", "MongoDB"],
-          type: "Projet Freelance",
-          image: "/ia-gc-challenge.png",
-          demoUrl: "https://ia-gc-challenge.tn/",
+          type: "Projet freelance",
+          image: "/rpm.png",
+          demoUrl: "https://rpm-conception.com/fr",
           codeUrl: "",
         },
         {
@@ -156,12 +156,12 @@ export const translations = {
       title: "Recent projects",
       items: [
         {
-          title: "IA & Civil Engineering Challenge Website",
-          desc: "Developed and deployed the official competition website, featuring role-based access, team submissions, and project evaluation workflows.",
+          title: "RPM Conception",
+          desc: "Developed and deployed the official website with product and category management, metalwork product showcases, and a responsive interface to present the company's custom metal fabrication services.",
           tags: ["Next.js", "Express.js", "Node.js", "MongoDB"],
           type: "Freelance Project",
-          image: "/ia-gc-challenge.png",
-          demoUrl: "https://ia-gc-challenge.tn/",
+          image: "/rpm.png",
+          demoUrl: "https://rpm-conception.com/fr",
           codeUrl: "",
         },
 

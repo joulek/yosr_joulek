@@ -1,8 +1,14 @@
 "use client";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Mail, Phone } from "lucide-react";
 import { Translations } from "@/lib/translations";
 import { Reveal, ease } from "./Slide";
+
+/** Coordonnées de contact — remplace par tes vraies infos. */
+const CONTACT = {
+  email: "joulekyosr123@gmail.com",
+  phone: "+216 99 080 604",
+};
 
 /** Mot révélé par un masque, comme un titre de diapositive qui se « dévoile ». */
 function MaskWord({ children, delay, className = "" }: { children: string; delay: number; className?: string }) {
@@ -261,7 +267,7 @@ export function Hero({ t, go }: { t: Translations; go: (n: number) => void }) {
             </Reveal>
 
             <Reveal delay={0.75} y={18}>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+              <div className="flex flex-col sm:flex-row items-center gap-5 justify-center lg:justify-start">
                 <button
                   onClick={() => go(2)}
                   className="group inline-flex items-center justify-center gap-3 rounded-full bg-gold px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--bg)] transition-all duration-300 hover:gap-4 hover:shadow-[0_10px_30px_-10px_var(--gold)]"
@@ -269,6 +275,27 @@ export function Hero({ t, go }: { t: Translations; go: (n: number) => void }) {
                   {t.hero.cta}
                   <ArrowRight size={14} />
                 </button>
+
+                {/* séparateur + icônes de contact */}
+                <div className="flex items-center gap-3">
+                  <span className="hidden sm:block h-px w-8 bg-line" />
+                  <a
+                    href={`mailto:${CONTACT.email}`}
+                    aria-label="Email"
+                    title={CONTACT.email}
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-line text-ink transition-all duration-300 hover:-translate-y-0.5 hover:border-gold hover:bg-gold hover:text-[var(--bg)]"
+                  >
+                    <Mail size={16} />
+                  </a>
+                  <a
+                    href={`tel:${CONTACT.phone.replace(/\s/g, "")}`}
+                    aria-label="Téléphone"
+                    title={CONTACT.phone}
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-line text-ink transition-all duration-300 hover:-translate-y-0.5 hover:border-gold hover:bg-gold hover:text-[var(--bg)]"
+                  >
+                    <Phone size={16} />
+                  </a>
+                </div>
               </div>
             </Reveal>
           </div>

@@ -23,7 +23,6 @@ export function Navbar({ t, lang, setLang, index, go }: NavbarProps) {
     { i: 1, label: t.nav.about },
     { i: 2, label: t.nav.projects },
     { i: 3, label: t.nav.skills },
-    { i: 4, label: t.nav.contact },
   ];
 
   return (
