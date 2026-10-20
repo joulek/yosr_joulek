@@ -22,7 +22,7 @@ export const translations = {
       stats: [
         { value: "3+", label: "Projets réalisés" },
         { value: "1er", label: "Prix national IA" },
-        { value: "5", label: "Stages & missions freelance" },
+        { value: "Full Stack", label: "Du design à la mise en production" },
       ],
     },
     projects: {
@@ -148,7 +148,7 @@ export const translations = {
       stats: [
         { value: "3+", label: "Projects built" },
         { value: "1st", label: "National AI Prize" },
-        { value: "5", label: "Internships & freelance gigs" },
+        { value: "Full Stack", label: "From design to production" },
       ],
     },
     projects: {
